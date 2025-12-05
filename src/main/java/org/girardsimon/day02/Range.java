@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import static org.girardsimon.common.MathUtils.countNumberOfDigits;
+
 /**
  * Represents a closed interval of positive long values and provides
  * utility methods for computing numeric patterns within this range.
@@ -113,10 +115,5 @@ public record Range(long left, long right) {
         }
 
         return sumBlockRepetedTwice;
-    }
-
-
-    private static int countNumberOfDigits(long number) {
-        return (int) Math.floor(Math.log10(number) + 1);
     }
 }
