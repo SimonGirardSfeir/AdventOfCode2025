@@ -24,6 +24,12 @@ import static org.girardsimon.common.MathUtils.countNumberOfDigits;
  */
 public record Range(long left, long right) {
 
+    public Range {
+        if (left >= right || left < 0) {
+            throw new IllegalArgumentException("Left value must be less than right value and should be greater than zero");
+        }
+    }
+
     /**
      * Computes the sum of all repeated-pattern numbers within this range.
      *
