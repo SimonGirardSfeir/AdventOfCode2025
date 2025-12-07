@@ -42,7 +42,7 @@ To run the real-input tests on your machine:
 
 ## Progress
 
-Days completed: **1-6**
+Days completed: **1-7**
 
 ---
 

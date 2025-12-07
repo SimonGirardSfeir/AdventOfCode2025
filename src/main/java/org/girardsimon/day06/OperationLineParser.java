@@ -1,30 +1,19 @@
 package org.girardsimon.day06;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public final class OperationLineParser {
 
-    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\p{Zs}+");
     private OperationLineParser() {
     }
 
     public static List<OperationLine> parseOperationLines(List<String> lines) {
         String lastLine = lines.getLast();
-        List<OperationType> operationTypes = Arrays.stream(WHITESPACE_PATTERN.split(lastLine.trim()))
-                .map(OperationType::fromToken)
-                .toList();
 
         Integer maxLength = lines.stream()
-                .map(String::length)
-                .sorted(Comparator.reverseOrder())
-                .findFirst()
+                .map(String::length).max(Comparator.naturalOrder())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid operation line: " + lastLine));
 
         int startIndex = 0;
@@ -54,23 +43,16 @@ public final class OperationLineParser {
 
         List<String> allOperationNumbers = lines.subList(0, lines.size() - 1);
 
-        return IntStream.range(0, operationTypeAndRanges.size())
-                .mapToObj(i -> {
-                    OperationTypeAndRange operationTypeAndRange = operationTypeAndRanges.get(i);
-                    OperationRange operationRange = operationTypeAndRange.operationRange;
-                    OperationType operationType = operationTypeAndRange.operationType;
+        return operationTypeAndRanges.stream().map(typeAndRange -> {
+                    OperationRange operationRange = typeAndRange.operationRange;
 
                     List<String> numbers = allOperationNumbers.stream()
                             .map(test -> {
-                                int max;
-                                if(operationRange.end > test.length()) {
-                                    max = test.length();
-                                } else {
-                                    max = operationRange.end;
-                                }
+                                int max = Math.min(operationRange.end, test.length());
                                 return test.substring(operationRange.start, max);
                             })
                             .toList();
+                    OperationType operationType = typeAndRange.operationType;
                     return new OperationLine(numbers, operationType);
                 })
                 .toList();
