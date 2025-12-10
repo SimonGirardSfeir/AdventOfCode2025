@@ -31,9 +31,9 @@ class Day07ResolverTest {
     @Test
     void resolve_part2_of_day07_problem() {
         // Act
-        long numberOfSplitBeam = manifoldPlan.countNumberOfBeamTimelines();
+        long numberOfBeamTimelines = manifoldPlan.countNumberOfBeamTimelines();
 
         // Assert
-        assertThat(numberOfSplitBeam).isEqualTo(10733529153890L);
+        assertThat(numberOfBeamTimelines).isEqualTo(10733529153890L);
     }
 }

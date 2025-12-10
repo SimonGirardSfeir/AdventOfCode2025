@@ -47,9 +47,9 @@ public final class OperationLineParser {
                     OperationRange operationRange = typeAndRange.operationRange;
 
                     List<String> numbers = allOperationNumbers.stream()
-                            .map(test -> {
-                                int max = Math.min(operationRange.end, test.length());
-                                return test.substring(operationRange.start, max);
+                            .map(numberLine -> {
+                                int max = Math.min(operationRange.end, numberLine.length());
+                                return numberLine.substring(operationRange.start, max);
                             })
                             .toList();
                     OperationType operationType = typeAndRange.operationType;

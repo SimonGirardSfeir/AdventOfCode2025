@@ -62,10 +62,10 @@ class ManifoldPlanTest {
         ManifoldPlan manifoldPlan = ManifoldPlanParser.parse(pattern);
 
         // Act
-        long numberOfSplit = manifoldPlan.countNumberOfBeamTimelines();
+        long numberOfBeamTimelines = manifoldPlan.countNumberOfBeamTimelines();
 
         // Assert
-        assertThat(numberOfSplit).isEqualTo(40L);
+        assertThat(numberOfBeamTimelines).isEqualTo(40L);
     }
 
 }
